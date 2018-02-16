@@ -12,9 +12,15 @@ var questions = [
 let getElement = (x) => {return document.getElementById(x);}
 
 let renderQuestion = () => {
+     if (pos >= questions.length) {
+       getElement("test").innerHTML = `You got ${correct} of ${questions.length} questions correct`;
+       getElement("test-status").innerHTML = `Test Completed`;
+       pos = 0;
+       correct = 0;
+       return false;
+     }
     getElement('test-status').innerHTML = `Question ${pos + 1} of ${questions.length}`;
     question = questions[pos][0];
-    console.log(question);
     var optionA = questions[pos][1];
     var optionB = questions[pos][2];
     var optionC = questions[pos][3];
@@ -28,25 +34,18 @@ let renderQuestion = () => {
         <input type="radio" name="options" value="D">${optionD} <br><br>
         <button type="button" onclick="checkAnswer()">Submit Answer</button>
       `;
-
-      if (pos >= questions.length) {
-          getElement('test').innerHTML = `You got ${correct} of ${questions.length} questions correct`;
-          getElement('test-status').innerHTML = `Test Completed`;
-          pos = 0;
-          correct = 0;
-          return false;
-      }
 }
 
  let checkAnswer = () => {
       let choices = document.getElementsByName('options');
+      var choice;
      choices.forEach((ch) => {
          if(ch.checked) {
-             var choice = ch.value;
+             choice = ch.value;
          }
      });
 
-     if (choice = questions[pos][5]) {
+     if (choice === questions[pos][5]) {
          correct++;
      }
      pos++;
