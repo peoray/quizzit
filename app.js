@@ -2,10 +2,16 @@ let pos = 0;
 let correct = 0;
 
 const questions = [
+  ["What is 2 x 1?", "4", "2", "6", "7", "B"],
   ["What is 2 x 2?", "4", "5", "6", "7", "A"],
-  ["What is 2 x 3?", "4", "5", "6", "7", "C"],
+  ["What is 2 x 3?", "4", "8", "6", "7", "C"],
   ["What is 2 x 4?", "4", "8", "6", "7", "B"],
-  ["What is 2 x 5?", "4", "5", "6", "10", "D"]
+  ["What is 2 x 5?", "4", "12", "6", "10", "D"],
+  ["What is 2 x 6?", "4", "12", "6", "10", "B"],
+  ["What is 2 x 7?", "14", "18", "16", "17", "A"],
+  ["What is 2 x 8?", "15", "16", "17", "18", "B"],
+  ["What is 2 x 9?", "12", "16", "18", "19", "C"],
+  ["What is 2 x 10?", "20", "16", "18", "10", "A"]
 ];
 
 // arrow functions allow for implicit returns, also prefer const whenever you can
@@ -15,10 +21,29 @@ const testEl = getElement("test");
 const testStatusEl = getElement("test-status");
 
 const checkEnd = () => {
+  let pictures = ["img/win.gif", "img/meh.jpeg", "img/lose.gif"];
+  let messages = [
+    "Great job!",
+    "That's just okay",
+    "You really need to do better"
+  ];
+  let score;
+
+  if (correct === 0) score = 2;
+
+  if (correct > 0 && correct <= 5) score = 1;
+
+  if (correct > 5) score = 0;
+
   if (pos >= questions.length) {
-    testEl.innerHTML = `You got ${correct} of ${
-      questions.length
-    } questions correct`;
+    testEl.innerHTML = `
+        <p>You got ${correct} of ${questions.length} questions correct</p>
+        <p>${messages[score]}</p>
+        <img src="${pictures[score]}" alt="Gif">
+        <button type="button" id="play-again">Play Again</button>
+    `;
+
+    getElement("play-again").addEventListener("click", playAgain);
 
     testStatusEl.innerHTML = `Test Completed`;
     pos = 0;
@@ -65,6 +90,10 @@ const checkAnswer = () => {
 
   //render next question
   renderQuestion();
+};
+
+const playAgain = () => {
+  return window.location.reload();
 };
 
 window.addEventListener("load", renderQuestion);
