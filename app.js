@@ -86,7 +86,7 @@ const checkAnswer = () => {
   pos += 1;
 
   // remove the previous event listener;
-  getElement("submit").removeEventListener("click", checkAnswer);
+  // getElement("submit").removeEventListener("click", checkAnswer);
 
   //render next question
   renderQuestion();
