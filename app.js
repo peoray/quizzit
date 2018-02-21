@@ -64,8 +64,8 @@ const renderQuestion = () => {
   testEl.innerHTML = `
         <h3>${question}</h3>
         <input type="radio" name="options" value="A">${optionA} <br>
-        <input type="radio" name="options" value="C">${optionB} <br>
-        <input type="radio" name="options" value="B">${optionC} <br>
+        <input type="radio" name="options" value="B">${optionB} <br>
+        <input type="radio" name="options" value="C">${optionC} <br>
         <input type="radio" name="options" value="D">${optionD} <br><br>
         <button type="button" id="submit">Submit Answer</button>
         `;
